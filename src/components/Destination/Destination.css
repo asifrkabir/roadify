@@ -1,0 +1,8 @@
+.destination-page{
+    min-height: 100vh;
+}
+
+.destination-page form {
+    background-color: rgb(243, 243, 243);
+    border-radius: 10px;
+}
