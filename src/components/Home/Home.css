@@ -1,0 +1,22 @@
+.home{
+    height: 100vh;
+    overflow-x: hidden;
+}
+
+.transportation-card{
+    margin: 20px;
+    width: auto;
+}
+
+.transportation-card .card{
+    width: 200px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 0px gray;
+    cursor: pointer;
+    transition: box-shadow 0.4s ease-in-out;
+}
+
+.transportation-card .card:hover{
+    box-shadow: 0 20px 15px rgba(180, 180, 180, 0.423);
+}
