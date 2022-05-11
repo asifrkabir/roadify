@@ -1,0 +1,86 @@
+[
+    {
+        "id": 1,
+        "image": "/src/assets/images/car.png",
+        "name": "Car",
+        "price": 67,
+        "capacity": 4
+    },
+    {
+        "id": 2,
+        "image": "/src/assets/images/car.png",
+        "name": "Car",
+        "price": 67,
+        "capacity": 4
+    },
+    {
+        "id": 3,
+        "image": "/src/assets/images/car.png",
+        "name": "Car",
+        "price": 67,
+        "capacity": 4
+    },
+    {
+        "id": 4,
+        "image": "/src/assets/images/bike.png",
+        "name": "Bike",
+        "price": 23,
+        "capacity": 1
+    },
+    {
+        "id": 5,
+        "image": "/src/assets/images/bike.png",
+        "name": "Bike",
+        "price": 23,
+        "capacity": 1
+    },
+    {
+        "id": 6,
+        "image": "/src/assets/images/bike.png",
+        "name": "Bike",
+        "price": 23,
+        "capacity": 1
+    },
+    {
+        "id": 7,
+        "image": "/src/assets/images/bus.png",
+        "name": "Bus",
+        "price": 200,
+        "capacity": 30
+    },
+    {
+        "id": 8,
+        "image": "/src/assets/images/bus.png",
+        "name": "Bus",
+        "price": 200,
+        "capacity": 30
+    },
+    {
+        "id": 9,
+        "image": "/src/assets/images/bus.png",
+        "name": "Bus",
+        "price": 200,
+        "capacity": 30
+    },
+    {
+        "id": 10,
+        "image": "/src/assets/images/train.png",
+        "name": "Train",
+        "price": 1000,
+        "capacity": 500
+    },
+    {
+        "id": 11,
+        "image": "/src/assets/images/train.png",
+        "name": "Train",
+        "price": 1000,
+        "capacity": 500
+    },
+    {
+        "id": 11,
+        "image": "/src/assets/images/train.png",
+        "name": "Train",
+        "price": 1000,
+        "capacity": 500
+    }
+]

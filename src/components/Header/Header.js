@@ -1,13 +1,19 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../App';
 import logo from '../../assets/images/logo.png';
 import './Header.css';
 
 const Header = () => {
 
+    const navigate = useNavigate();
+
+    const handleClick = (type) => {
+        const url = `/destination/${type}`;
+        navigate(url);
+    }
+
     const [loggedInUser] = useContext(UserContext);
-    console.log(loggedInUser);
 
     return (
         <div className="d-flex justify-content-center">
@@ -22,7 +28,7 @@ const Header = () => {
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div className="ms-auto navbar-nav">
                         <Link className="nav-link" to='/'>Home</Link>
-                        <Link className="nav-link" to='/destination'>Destination</Link>
+                        <div onClick={() => handleClick('bike')} style={{ cursor: 'pointer' }} className="nav-link">Destination</div>
                         <Link className="nav-link" to='/'>Blog</Link>
                         <Link className="nav-link" to='/'>Contact</Link>
                         {

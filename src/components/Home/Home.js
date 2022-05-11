@@ -5,6 +5,7 @@ import bike from '../../assets/images/bike.png';
 import car from '../../assets/images/car.png';
 import bus from '../../assets/images/bus.png';
 import train from '../../assets/images/train.png';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
 
@@ -15,11 +16,18 @@ const Home = () => {
         backgroundAttachment: 'fixed'
     }
 
+    const navigate = useNavigate();
+
+    const handleClick = (type) => {
+        const url = `/destination/${type}`;
+        navigate(url);
+    }
+
     return (
         <div>
             <div className="home d-flex justify-content-center align-items-center" style={bgStyle}>
                 <div className="row d-flex justify-content-center align-items-center">
-                    <div className="col-md-4 transportation-card">
+                    <div onClick={() => handleClick('bike')} className="col-md-4 transportation-card">
                         <div className="card border-0">
                             <img src={bike} className="card-img-top" alt="..." />
                                 <div className="card-body">
@@ -27,7 +35,7 @@ const Home = () => {
                                 </div>
                         </div>
                     </div>
-                    <div className="col-md-4 transportation-card">
+                    <div onClick={() => handleClick('car')} className="col-md-4 transportation-card">
                         <div className="card border-0">
                             <img src={car} className="card-img-top" alt="..." />
                                 <div className="card-body">
@@ -35,7 +43,7 @@ const Home = () => {
                                 </div>
                         </div>
                     </div>
-                    <div className="col-md-4 transportation-card">
+                    <div onClick={() => handleClick('bus')} className="col-md-4 transportation-card">
                         <div className="card border-0">
                             <img src={bus} className="card-img-top" alt="..." />
                                 <div className="card-body">
@@ -43,7 +51,7 @@ const Home = () => {
                                 </div>
                         </div>
                     </div>
-                    <div className="col-md-4 transportation-card">
+                    <div onClick={() => handleClick('train')} className="col-md-4 transportation-card">
                         <div className="card border-0">
                             <img src={train} className="card-img-top" alt="..." />
                                 <div className="card-body">

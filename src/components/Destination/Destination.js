@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Destination.css';
 import map from '../../assets/images/map.png';
 import TransportDetails from '../TransportDetails/TransportDetails';
+import { useParams } from 'react-router-dom';
+import transportationData from '../../transportationData.json';
 
 const Destination = () => {
+
+    const {type} = useParams();
+
+    const [transportList, setTransportList] = useState([]);
+
+    useEffect(() => {
+        setTransportList(transportationData.filter(t => t.name.toLowerCase() === type));
+    }, [type])
+
+    console.log(transportList);
+
     return (
         <div className="destination-page d-flex justify-content-center align-items-center">
             <div className="row d-flex justify-content-center w-100">
@@ -28,9 +41,9 @@ const Destination = () => {
                             </ul>
                         </div>
                         <div>
-                            <TransportDetails></TransportDetails>
-                            <TransportDetails></TransportDetails>
-                            <TransportDetails></TransportDetails>
+                            {
+                                transportList?.map((transport) => <TransportDetails transport={transport} key={transport.id}></TransportDetails>)
+                            }
                         </div>
                     </form>
                 </div>
