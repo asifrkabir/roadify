@@ -1,5 +1,4 @@
 import React from 'react';
-import car from '../../assets/images/car.png';
 import peopleIcon from '../../assets/images/peopleicon.png';
 import './TransportDetails.css';
 
