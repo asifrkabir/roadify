@@ -1,3 +1,9 @@
+# Roadify by asifrkabir
+
+Roadify is a React Single Page Application (SPA) project which provides users a platform where they may choose various modes of transportation to move from one location to another.
+
+The live site can be enjoyed [here](https://roadify-1.web.app/)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
