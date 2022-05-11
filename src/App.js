@@ -5,11 +5,16 @@ import Home from './components/Home/Home';
 import Login from './components/Login/Login';
 import SignUp from './components/Login/SignUp';
 import Destination from './components/Destination/Destination';
+import { createContext, useState } from 'react';
+
+export const UserContext = createContext();
 
 function App() {
 
+  const [loggedInUser, setLoggedInUser] = useState({});
+
   return (
-    <div>
+    <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
 
       <Header></Header>
 
@@ -20,7 +25,7 @@ function App() {
         <Route path="/signup" element={<SignUp></SignUp>}></Route>
       </Routes>
 
-    </div>
+    </UserContext.Provider>
   );
 }
 
