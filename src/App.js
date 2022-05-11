@@ -6,6 +6,7 @@ import Login from './components/Login/Login';
 import SignUp from './components/Login/SignUp';
 import Destination from './components/Destination/Destination';
 import { createContext, useState } from 'react';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 export const UserContext = createContext();
 
@@ -20,7 +21,11 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
-        <Route path="/destination" element={<Destination></Destination>}></Route>
+        <Route path='/destination' element={
+          <PrivateRoute>
+            <Destination></Destination>
+          </PrivateRoute>
+        }></Route>
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/signup" element={<SignUp></SignUp>}></Route>
       </Routes>

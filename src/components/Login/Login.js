@@ -1,12 +1,28 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { UserContext } from '../../App';
 import FacebookLogin from './FacebookLogin';
 import GoogleLogin from './GoogleLogin';
 import './Login.css';
+import { signInUserWithEmailAndPassword } from './LoginManager';
 
 const Login = () => {
 
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    let { from } = location.state || { from: { pathname: "/" } };
+
     const [disableLogin, setdisableLogin] = useState(true);
+    const [user, setUser] = useState({
+        isSignedIn: false,
+        name: '',
+        email: '',
+        photo: '',
+        password: ''
+    });
 
     const handleBlur = (e) => {
         let isFieldValid = true;
@@ -22,15 +38,35 @@ const Login = () => {
 
         if (isFieldValid) {
             setdisableLogin(false);
+            const newUserInfo = { ...user };
+            newUserInfo[e.target.name] = e.target.value;
+            setUser(newUserInfo);
         }
         else {
             setdisableLogin(true);
         }
     }
 
+    const handleSubmit = (e) => {
+        signInUserWithEmailAndPassword(user.email, user.password)
+            .then((res) => {
+                handleResponse(res, true);
+            })
+
+        e.preventDefault();
+    }
+
+    const handleResponse = (res, redirect) => {
+        setUser(res);
+        setLoggedInUser(res);
+        if (redirect) {
+            navigate(from, { replace: true });
+        }
+    }
+
     return (
         <div className="login-page d-flex flex-column justify-content-center align-items-center">
-            <form className="border p-5">
+            <form onSubmit={handleSubmit} className="border p-5">
                 <h4 className="fw-bold mb-4">Login</h4>
                 <div className="mb-3">
                     <input onBlur={handleBlur} name="email" type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email" required />

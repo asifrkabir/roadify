@@ -1,12 +1,29 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { UserContext } from '../../App';
 import FacebookLogin from './FacebookLogin';
 import GoogleLogin from './GoogleLogin';
+import { newUserWithEmailAndPassword } from './LoginManager';
 
 const SignUp = () => {
 
+    const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    let { from } = location.state || { from: { pathname: "/" } };
+
     const [disableLogin, setdisableLogin] = useState(true);
     const [password, setPassword] = useState('');
+
+    const [user, setUser] = useState({
+        isSignedIn: false,
+        name: '',
+        email: '',
+        photo: '',
+        password: ''
+    });
 
     const handleBlur = (e) => {
         let isFieldValid = true;
@@ -18,10 +35,10 @@ const SignUp = () => {
             const isPasswordValid = e.target.value.length > 6;
             const passwordHasNumber = /\d{1}/.test(e.target.value);
             isFieldValid = isPasswordValid && passwordHasNumber;
-            if(isFieldValid){
+            if (isFieldValid) {
                 setPassword(e.target.value);
             }
-            else{
+            else {
                 setPassword('');
             }
         }
@@ -31,15 +48,38 @@ const SignUp = () => {
 
         if (isFieldValid) {
             setdisableLogin(false);
+
+            if (e.target.name !== 'confirm-password') {
+                const newUserInfo = { ...user };
+                newUserInfo[e.target.name] = e.target.value;
+                setUser(newUserInfo);
+            }
         }
         else {
             setdisableLogin(true);
         }
     }
 
+    const handleSubmit = (e) => {
+        newUserWithEmailAndPassword(user.name, user.email, user.password)
+            .then((res) => {
+                handleResponse(res, true);
+            })
+
+        e.preventDefault();
+    }
+
+    const handleResponse = (res, redirect) => {
+        setUser(res);
+        setLoggedInUser(res);
+        if (redirect) {
+            navigate(from, { replace: true });
+        }
+    }
+
     return (
         <div className="login-page d-flex flex-column justify-content-center align-items-center">
-            <form className="border p-5">
+            <form onSubmit={handleSubmit} className="border p-5">
                 <h4 className="fw-bold mb-4">Create an account</h4>
                 <div className="mb-3">
                     <input name="name" type="text" className="form-control" id="name" aria-describedby="emailHelp" placeholder="Name" required />
