@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, updateProfile } from 'firebase/auth';
 import auth from '../../firebase.init';
 
 export const signInUserWithEmailAndPassword = (email, password) => {
@@ -42,4 +42,25 @@ const updateUserName = name => {
     }).catch((error) => {
         console.log(error);
     });
+}
+
+export const handleGoogleSignIn = () => {
+    const provider = new GoogleAuthProvider();
+    return signInWithPopup(auth, provider)
+        .then((result) => {
+            // console.log(result);
+            // const { displayName, email, photoURL } = result.user;
+            // const signedInUser = {
+            //     isSignedIn: true,
+            //     name: displayName,
+            //     email: email,
+            //     photo: photoURL,
+            //     success: true
+            // };
+            // return signedInUser;
+            return result.user;
+        }).catch((error) => {
+            console.log(error);
+            console.log(error.message);
+        });
 }
